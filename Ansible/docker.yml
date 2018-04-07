@@ -2,11 +2,15 @@
   - hosts: docker
     become: true
     tasks:
+     - name: Install docker
+       apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
      - name: add the user to docker group
        shell: >
          usermod -aG docker {{ansible_user}}
-    roles:
-     - angstwad.docker_ubuntu
   
   - hosts: docker
     become: true
