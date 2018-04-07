@@ -1,0 +1,13 @@
+lbg1 ansible_host=192.168.3.2 swarm_iface=enp0s8 ansible_user=vagrant node_name=lbg1
+lbg2 ansible_host=192.168.3.3 swarm_iface=enp0s8 ansible_user=vagrant node_name=lbg2
+lbg3 ansible_host=192.168.3.4 swarm_iface=enp0s8 ansible_user=vagrant node_name=lbg3
+lbg4 ansible_host=192.168.3.5 swarm_iface=enp0s8 ansible_user=vagrant node_name=lbg4
+lbg5 ansible_host=192.168.3.6 swarm_iface=enp0s8 ansible_user=vagrant node_name=lbg5
+
+[docker:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+[docker]
+lbg1
+lbg2
+lbg3

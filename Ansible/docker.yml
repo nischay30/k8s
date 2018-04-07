@@ -1,0 +1,39 @@
+---
+  - hosts: docker
+    become: true
+    tasks:
+     - name: add the user to docker group
+       shell: >
+         usermod -aG docker {{ansible_user}}
+    roles:
+     - angstwad.docker_ubuntu
+  
+  - hosts: docker
+    become: true
+    tasks:
+     - name: Update the cache and install https certificate
+       apt:
+         name: apt-transport-https 
+         state: present
+         update_cache: yes
+ 
+     - name: Add the apt key
+       apt_key:
+         url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+         state: present
+     
+     - name: Add the apt repositroy
+       apt_repository:
+         repo:  deb http://apt.kubernetes.io/ kubernetes-xenial main
+         state: present
+ 
+     - name: Install kubelet kubeadm and kubectl
+       apt:
+         name: "{{ item }}"
+         state: present
+         update_cache: yes
+       with_items:
+         - kubelet
+         - kubeadm
+         - kubectl
+ 
