@@ -1,22 +1,21 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: ReplicaSet
 metadata:
-  name: my-deployment
+  name: my-app-replica-set
   labels:
-    app: my-app
-    tier: front-end
+    type: front-end
+    name: myapp
 spec:
   template:
     metadata:
       name: my-app
       labels:
         type: front-end
-        app: myapp
     spec:
       containers:
-        - image:  nginx
-          name:  my-nginx-container
-  replicas: 4
+        - name: mongo
+          image: mongo
+  replicas: 3
   selector:
     matchLabels:
       type: front-end

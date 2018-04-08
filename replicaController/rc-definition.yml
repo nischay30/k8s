@@ -10,7 +10,7 @@ spec:
     metadata:
       name: myapp
       labels:
-        app: my-app
+        app: myapp
         type: front-end
     spec:
       containers:
