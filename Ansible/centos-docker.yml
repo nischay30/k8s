@@ -1,0 +1,24 @@
+---
+  - hosts: docker
+    become: true
+    tasks:
+     - name: Install docker
+       yum:
+        name: docker
+        state: present
+        update_cache: yes
+
+     - name: Add Docker Group
+       group:
+        name: docker
+        state: present
+           
+     - name: add the user to docker group
+       shell: >
+         usermod -aG docker {{ansible_user}}
+
+     - name: Enable docker and start it 
+       systemd:
+        name: docker
+        state: started
+        enabled: true
